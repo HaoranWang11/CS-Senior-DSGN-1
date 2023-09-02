@@ -1,3 +1,3 @@
 # CS-Senior-DSGN-1
-## Idea one: Login project.
-I wanna make a login project
+Idea one: Login project
+I want to make a login project
