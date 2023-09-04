@@ -1,5 +1,4 @@
 # CS-Senior-DSGN-1
-Idea one: Login project
 
 LogEasy is software used for logging purposes. Imagine you are a teacher and want to take attendance for the entire classroom. Currently, at the University of Cincinnati, you would have to make a quiz or assignment, and having to set up a quiz or assignment for every single time you want to get the attendance of the class could be tedious. Instead, our software, LogEasy makes it so that the teacher runs the program, and the students go to the website provided by the teacher and put in their name and student ID. This way, there is no need to go through the hassle of making an assignment just to take attendance.
 
