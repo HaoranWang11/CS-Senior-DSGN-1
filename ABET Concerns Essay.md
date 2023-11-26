@@ -1,4 +1,4 @@
-Essay on Project Constraints
+## Essay on Project Constraints
 
 There are a number of restrictions that have come up while thinking about building our website for attendance verification that might potentially affect the outcome of our project.
 
