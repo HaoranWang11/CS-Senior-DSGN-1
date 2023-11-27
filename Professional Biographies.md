@@ -35,9 +35,9 @@ Basically I'm seeking with any kind of project based by Python and C++)
  - Looking for Software development projects, a practical one that could be actually used in companies would be prefered. Gaming industries have always been my preference because they are a lot of fun. Software Applications are also considered. I would like to fight with a team of 4-6 for a bigger project. A website is in my consideration as well if it counts for a senior design project.
 
 
-**Matthew Salazar**
+## **Matthew Salazar**
 
-**Co-op and experience**
+## **Co-op and experience**
 
 * Software Developer, Siemens Industries Software, Milford, Ohio (3 full rotations):
     * Python and C++ heavy work, test cases for built automation programs
@@ -56,19 +56,19 @@ messaging interface for customers of the product, corrected 30+ entries.
     * Solution to cyber scenarios were presented to industry experts, making each solution better than the last.
     * Industry recognized credential earned in recognition of hard work and understanding.
 
-**Skills/expertise areas**
+## **Skills/expertise areas**
 * *Programming:* Python, C++, C, Java
 * *Operating Systems:* Windows, Linux
 * *Database Programming:* SQL
 * *Office Applicatrions:* Microsoft office
 
-**Areas Of interest**
+## **Areas Of interest**
 * Facial recognition Security
 * E-Authentication system
 * Artifical Intelligence
 * Image recognition
 
-**Type of Project sought**
+## **Type of Project sought**
 * Image recognition and identification using Artifical Intelligence
 * Application security using E-Autherntication 
 * Sound control application that utilizies motion and or gestures to control
