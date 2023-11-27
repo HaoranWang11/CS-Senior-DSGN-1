@@ -35,9 +35,9 @@ Basically I'm seeking with any kind of project based by Python and C++)
  - Looking for Software development projects, a practical one that could be actually used in companies would be prefered. Gaming industries have always been my preference because they are a lot of fun. Software Applications are also considered. I would like to fight with a team of 4-6 for a bigger project. A website is in my consideration as well if it counts for a senior design project.
 
 
-# ========**Member 2**========
+## ========**Member 3**========
 ## **Name**
-# **Matthew Salazar**
+* **Matthew Salazar**
 
 ## **Co-op and experience**
 
