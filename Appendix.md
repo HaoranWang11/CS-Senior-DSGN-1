@@ -44,7 +44,7 @@
 * Preparing for the final presentation
 * Decisions Made: Finalizing presentation material
 
-## Total Hours per Member:
+## Total Hours per Member (**Meeting hours**):
 * Weeks 1-2: 8 hours
 * Weeks 3-8: 24 hours
 * Weeks 9-10: 8 hours
