@@ -6,7 +6,7 @@
 * Weeks 1-2: Initial Discussions and Planning (4 hours per week)
 * Weeks 3-8: Development Phase (4 hours per week)
 * Weeks 9-10: Development Phase and testing (4 hours per week)
-* Week 11-12: Wrapping up Semester (Final Review and Presentation) Preparation (4 hours per week)
+* Week 11-12: Wrapping up Semester (Final Review and Preparation) (~4 hours per week)
 
 ## Week 1 Meeting Notes:
 * Attendees: Haoran, Matthew, Jacob
@@ -36,7 +36,7 @@
 * Topics Covered: Test results, bug fixing, UI/UX improvements
 * Key Decisions: Improve code, and add more UI features
 
-## Week 11-12:  Wrapping up Semester (Final Review and Presentation) Preparation
+## Week 11-12:  Wrapping up Semester (Final Review and Preparation)
 * Hours: ~4 hours/week
 * Meeting Notes:
 * Attendees: Haoran, Matthew, Jacob
