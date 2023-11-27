@@ -16,7 +16,20 @@
 
 ### Task list for Jacob Bai:
 
- *Specifying* the significance and need of usage of facial recogonization and GPS tracking.
+ *Specifying* the significance and need of usage of GPS tracking.
+ 
+ *Investigating* in the lasted GPS tracking technics.
+ 
+ *Researching* GPS tracking methods and technics with programming language Python.
+ 
+ *Designing* the processes of applying GPS tracking code technics
+ 
+ *Delievering* perfect Python Code that applies the GPS tracking technic onto the website server.
+
+
+### Task list for Matthew Salazar:
+
+ *Specifying* the significance and need of usage of facial recogonization.
  
  *Investigating* in the lasted facial recogonization technics.
  
