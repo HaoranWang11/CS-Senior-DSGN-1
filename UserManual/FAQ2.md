@@ -84,4 +84,12 @@ Yes, you have the option to delete your account and associated data within your 
 
 ## Troubleshooting
 
-<fon
+<font color="green">
+
+### How do I report a bug?
+</font>
+
+If you encounter any bugs or issues, please report them to our team via email:
+- Haoran Wang: [wang3hr@mail.uc.edu](mailto:wang3hr@mail.uc.edu)
+- Jacob (Yage) Bai: [baiyg@mail.uc.edu](mailto:baiyg@mail.uc.edu)
+- Matthew Salazar: [mathhewsalazar30@gmail.com](mailto:mathhewsalazar30@gmail.com)
