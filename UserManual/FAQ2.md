@@ -1,3 +1,7 @@
+<img width="960" alt="7a594935f65183781f0b184ffab27e6" src="https://github.com/HaoranWang11/CS-Senior-DSGN-1/assets/90012803/b47ced18-4b27-4507-9abe-54480323e8df">
+<img width="960" alt="ff2683077028ff789a6823f5fcaf3e7" src="https://github.com/HaoranWang11/CS-Senior-DSGN-1/assets/90012803/b1fb0dec-ff90-4fde-acf3-42d216edadda">
+<img width="960" alt="4decb38759a7c1dd2da7834b98e39dc" src="https://github.com/HaoranWang11/CS-Senior-DSGN-1/assets/90012803/a1eab94b-6f1f-4afa-aa05-bb1e8b481a55">
+
 # Frequently Asked Questions (FAQ)
 
 ## General Questions
