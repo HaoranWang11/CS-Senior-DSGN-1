@@ -25,6 +25,9 @@ For any issues or inquiries, please feel free to reach out to our support team v
 
 
 
+
+
+
 ### How do I create an account?
 
 To create an account, visit the main website and navigate to the registration page.
