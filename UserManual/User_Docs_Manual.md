@@ -6,14 +6,11 @@
 
 ## General Questions
 
-<font color="green">
-
 ### What is Loglock about?
 </font>
 
 Loglock is a platform designed for students and instructors to efficiently manage attendance tracking.
 
-<font color="green">
 
 ### How can I contact support?
 </font>
@@ -23,7 +20,10 @@ For any issues or inquiries, please feel free to reach out to our support team v
 - Jacob (Yage) Bai: [baiyg@mail.uc.edu](mailto:baiyg@mail.uc.edu)
 - Matthew Salazar: [mathhewsalazar30@gmail.com](mailto:mathhewsalazar30@gmail.com)
 
+
 ## Account Related
+
+
 
 ### How do I create an account?
 
