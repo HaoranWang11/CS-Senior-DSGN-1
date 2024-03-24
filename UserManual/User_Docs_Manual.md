@@ -60,7 +60,7 @@ We prioritize the security of your personal information. While we do not store a
 
 ### How do you handle my data?
 
-Your data is handled securely through our partnership with GradeScope, ensuring the protection of your account information.
+Your data is handled securely through our backend integration of GradeScope, ensuring the protection of your account information.
 
 
 ### Can I delete my account and data?
