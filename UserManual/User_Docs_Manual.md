@@ -48,15 +48,12 @@ Yes, you can change your username by accessing the "change username" option on t
 
 ## Usage
 
-<font color="green">
-
 ### How do I use Loglock?
 </font>
 
 - **Students**: Register your account and log in using the one-time password provided by your instructor.
 - **Instructors**: Log in to your account and set up the password for attendance tracking.
 
-<font color="green">
 
 ### Is there a mobile app available?
 </font>
@@ -65,21 +62,18 @@ Unfortunately, Loglock does not currently have a mobile app available.
 
 ## Security and Privacy
 
-<font color="green">
 
 ### Is my personal information secure?
 </font>
 
 We prioritize the security of your personal information. While we do not store any personal data, we work with GradeScope to process account information securely.
 
-<font color="green">
 
 ### How do you handle my data?
 </font>
 
 Your data is handled securely through our partnership with GradeScope, ensuring the protection of your account information.
 
-<font color="green">
 
 ### Can I delete my account and data?
 </font>
@@ -88,7 +82,7 @@ Yes, you have the option to delete your account and associated data within your 
 
 ## Troubleshooting
 
-<font color="green">
+
 
 ### How do I report a bug?
 </font>
