@@ -1,4 +1,0 @@
-- Images of Software being Used
-- Fonts
-- CSS Styles
-- 
