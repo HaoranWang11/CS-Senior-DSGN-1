@@ -1,0 +1,92 @@
+{% extends "user_base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column;">
+	<h1 align="center">Welcome {{ user.name }}, Your current grade is {{ user.grade }}</h1>
+	<div class="sub-main-w3">
+		<div class="sub-main-w3-container">
+			<div class="arrow-container animated fadeInDown">
+				<div class="arrow-2" style="background: #00000000">
+					<img style="left:0px; top:-2px; width:100%; height: 100%;" src="/static/images/logo.png" alt="" class="">
+				</div>
+				<div class="arrow-1 animated hinge infinite zoomIn"></div>
+			</div>
+			<h2>Sign in now</h2>
+			<p>Enter your check-in code below</p>
+			<div class="form-style-agile">
+				<input placeholder="Check-in Password" id="check_in_pwd" name="check_in_pwd" type="text" required="" autocomplete="off">
+				<input type="submit" value="Check-in" onclick="check_in();">
+			</div>
+		</div>
+	</div>
+
+	<div class="history-container">
+		{% if attendances.items|length != 0 %}
+		<div style="width:100%; text-align: left;">
+			<b style="width: 100%;">History</b>
+		</div>
+		<div style="width:100%; height: 1px; background-color: #333333; margin-top: 2px;"></div>
+		<div style="width:100%; height: 1px; background-color: #666666; margin-bottom: 3px;"></div>
+    	<table style="width:100%; margin:auto;">
+      	<thead>
+        	<tr>
+		  		<th style="width:50%; text-align:left">Check-in Password</th>
+          		<th style="width:50%; text-align:left">Check-in Time</th>
+        	</tr>
+      	</thead>
+      	<tbody>
+        	{% for item in attendances.items %}
+          	<tr style="height:42px;">
+				<td style="width:50%; text-align:left">{{ item.pwd }}</td>
+            	<td style="width:50%; text-align:left">
+                	{{ item.attendance_time.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+            	</td>
+          	</tr>
+        	{% endfor %}
+      	</tbody>
+    	</table>
+		{% endif %}
+	</div>
+</div>
+
+<script>
+	function check_in() {
+		let pwd = document.getElementById('check_in_pwd').value;
+		if (pwd.trim().length < 1) {
+			Swal.fire("error", "No check in password entered!");
+			return;
+		}
+		var params = {
+			pwd : pwd
+        };
+        var url = '/attendance';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+				Swal.fire({
+            		title: 'success',
+            		icon: 'success',
+            		showCancelButton: false,
+            		confirmButtonText: 'Ok',
+            		cancelButtonText: 'cancel'
+        			}).then((result) => {
+            			if (result.value) {
+            				location.reload();
+            			}
+        			});
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+</script>
+{% endblock %}

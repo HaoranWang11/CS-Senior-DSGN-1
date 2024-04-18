@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>LogLock - Login</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/login.css" />   
+    <link rel="stylesheet" href="/static/js/element-ui/lib/theme-chalk/index.css">
+    <!-- Include the Vue.js library -->
+    <script src="/static/js/vue@2.6.14/dist/vue.js"></script>
+    <script src="/static/js/axios/axios.min.js"></script>
+    <script src="/static/js/element-ui/lib/index.js"></script>  
+</head>
+<body style="background: url('/static/images/bg1.png'); background-size: cover; background-repeat: no-repeat;">
+    <div class="main" id="app">
+    	<form class="mainin" @submit.prevent="submitForm" enctype="multipart/form-data">
+        	<h1 style="color: #eee;">LogLock - Login</h1>
+            <div class="mainin1">
+            	<ul>
+                	<li><span>Email Address</span><input ref="email" name="email" type="text" placeholder="email" class="SearchKeyword"></li>
+                    <li><span>Password</span><input ref="password" type="password" name="password" placeholder="password" class="SearchKeyword2"></li>
+                    <li><button class="submit">Login</button></li>
+                    <li style="width: 100%; text-align: right;"><a href="register">Register an account</a></li>
+                </ul>
+            </div>
+        </form>
+        <div class="footpage"><span style="font-family:arial;">Copyright</span> 2024 <a href="http://www.HelloLogLock.com/" target="_blank">LogLock</a></div>
+    </div>
+
+    <!-- Vue.js code -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                // Add more data here if needed
+            },
+            methods: {
+                // Add more methods here if needed
+                submitForm() {
+                    this.showReturnResults = false;
+                    const formData = new FormData();
+                    formData.append('email', this.$refs.email.value);
+                    formData.append('password', this.$refs.password.value);
+                    axios.post('/login', formData).then(response => {
+                        if (response.status == '200') {
+                            if (response.data.result == 'success')
+                                window.location.href = '/';
+                            else
+                                this.$confirm(response.data.message);
+                        } else {
+                            this.$confirm(response.data.statusText);
+                        }
+                    }).catch(error => {
+                        console.error('Submit error:', error);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

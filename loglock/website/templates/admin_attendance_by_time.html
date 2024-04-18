@@ -1,0 +1,116 @@
+{% extends "admin_base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Attendance Log</h1>
+	Select attendance date: <input type="date" id="select_date" onchange="change_date(this.value)" />
+	<br /><br />
+	{% if attendances.items|length == 0 %}
+	<span>No attendance data</span>
+	{% endif %}
+	{% if attendances.items|length != 0 %}
+	<div style="width:100%; color: white; background-color: #33333366; padding: 16px;">
+    <table style="width:100%">
+      <thead>
+        <tr style="height:42px;">
+          <th style="width:20%; text-align:left; color:#aaaabb;">Student Name</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">Student Email</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">Check-in Password</th>
+          <th style="width:20%; text-align:left; color:#aaaabb;">Check-in Time</th>
+		  <th style="width:20%; text-align:right; color:#aaaabb;">Operate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in attendances.items %}
+          <tr style="height:42px;">
+			<td style="width:20%; text-align:left">{{ item.name }}</td>
+            <td style="width:20%; text-align:left">{{ item.email }}</td>
+			<td style="width:20%; text-align:left">{{ item.pwd }}</td>
+            <td style="width:20%; text-align:left">
+                {{ item.attendance_time.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+            </td>
+			<td style="width:20%; text-align:right">
+				<button style="border-radius:revert;" onclick="del('{{item.id}}')">Delete</button>
+			</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+	</div>
+	{% endif %}
+
+	<div style="margin-top:18px; color: white;">
+		<span>Current:{{ attendances.page }}, PageCount: {{ attendances.pages }}, Items: {{ attendances.total }}</span>
+		<a style="color: #22d6d6;" href="/admin/attendance_by_time?t={{curr_t}}">&lt;Home&gt;</a>
+		{% if attendances.has_prev %}
+			<a style="color: #22d6d6;" href="/admin/attendance_by_time?page={{attendances.prev_num}}&limit=10&t={{curr_t}}">&lt;Prev&gt;</a>
+		{% endif %}
+		{% if attendances.has_next %}
+		<a style="color: #22d6d6;" href="/admin/attendance_by_time?page={{attendances.next_num}}&limit=10&t={{curr_t}}">&lt;Next&gt;</a>
+		{% endif %}
+		<a style="color: #22d6d6;" href="/admin/attendance_by_time?page={{attendances.pages}}&limit=10&t={{curr_t}}">&lt;End&gt;</a>
+	</div>
+  </body>
+  <script>
+	function getUrlParms(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+
+	document.getElementById('select_date').value = getUrlParms("t");
+
+	function change_date(t) {
+		window.location.href = '/admin/attendance_by_time?t='+t;
+	}
+
+	function del(id) {
+		Swal.fire({
+			title: 'Are you sure to delete?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes',
+			cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.value) {
+            	post_del(id);
+            }
+        });
+	}
+
+	function post_del(id) {
+		var params = {
+			id : id
+        };
+        var url = '/admin/delete_attendance';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+				Swal.fire({
+            		title: 'Delete success',
+            		icon: 'success',
+            		showCancelButton: false,
+            		confirmButtonText: 'Ok',
+            		cancelButtonText: 'cancel'
+        			}).then((result) => {
+            			if (result.value) {
+            				location.reload();
+            			}
+        			});
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+  </script>
+{% endblock %}

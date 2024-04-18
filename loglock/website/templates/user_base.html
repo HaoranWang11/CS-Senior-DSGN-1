@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link
+            rel="stylesheet"
+            href="/static/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="/static/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+		<link rel="stylesheet" href="/static/sweetalert2.min.css"/>
+        <link rel="stylesheet" href="/static/css/styles.css"/>
+		<script type="text/javascript" src="/static/sweetalert2.min.js"></script>
+		<script type="text/javascript" src="/static/jquery.min.js"></script>
+        <title> {% block title %}Home{% endblock %}</title>
+    </head>
+    <body style="background: url('/static/images/bg7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #335555F8; padding: 10px 0 10px 60px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/static/images/logo.png" alt="Logo" style="width:60px; height: 60px;"></a>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav" style="font-size: 1.2rem;">
+                    {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" id="home" href="/">Home</a>
+                        <a class="nav-item nav-link" id="AccountSettings" href="/accountsettings">AccountSettings</a>
+                        <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                    {% else %}
+                        <a class="nav-item nav-link" id="signup" href="/sign-up">Sign Up</a>
+                        <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                        <a class="nav-item nav-link" id="about" href="/about">About</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                    <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alert-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="container">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+
+        <script
+            src="/static/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="/static/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

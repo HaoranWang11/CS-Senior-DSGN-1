@@ -1,0 +1,57 @@
+{% extends "admin_base.html" %}
+{% block title %}Account management{% endblock %}
+
+{% block content %}
+    <h1>Grade management</h1>
+	Query by email: <input type="text" id="email" value="{{query_email}}"/> <button style="border-radius:revert;" onclick="query_by_email();">Query</button>
+	<br /><br />
+	{% if users.items|length == 0 %}
+	<span>No attendance data</span>
+	{% endif %}
+	{% if users.items|length != 0 %}
+	<div style="width:100%; color: white; background-color: #33333366; padding: 16px;">
+    <table style="width:100%">
+      <thead>
+        <tr style="height:32px;">
+          <th style="width:15%; text-align:left; color:#aaaabb;">User Name</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">User Email</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">Register Date</th>
+		  <th style="width:20%; text-align:right; color:#aaaabb;">Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in users.items %}
+          <tr style="height:42px;">
+			<td style="width:15%; text-align:left">{{ item.name }}</td>
+            <td style="width:20%; text-align:left">{{ item.email }}</td>
+            <td style="width:20%; text-align:left">
+                {{ item.created_at.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+            </td>
+			<td style="width:20%; text-align:right">{{ item.grade }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+	</div>
+	{% endif %}
+
+	<div style="margin-top:18px; color: white;">
+		<span>Current:{{ users.page }}, PageCount: {{ users.pages }}, Items: {{ users.total }}</span>
+		<a style="color: #22d6d6;" href="/admin/grade_management?email={{query_email}}">&lt;Home&gt;</a>
+		{% if users.has_prev %}
+			<a style="color: #22d6d6;" href="/admin/grade_management?email={{query_email}}&page={{users.prev_num}}&limit=10">&lt;Prev&gt;</a>
+		{% endif %}
+		{% if users.has_next %}
+		<a style="color: #22d6d6;" href="/admin/grade_management?email={{query_email}}&page={{users.next_num}}&limit=10">&lt;Next&gt;</a>
+		{% endif %}
+		<a style="color: #22d6d6;" href="/admin/grade_management?email={{query_email}}&page={{users.pages}}&limit=10">&lt;End&gt;</a>
+	</div>
+  </body>
+
+  <script>
+	function query_by_email() {
+		let email = document.getElementById('email').value;
+		window.location.href = '/admin/grade_management?email=' + email;
+	}
+  </script>
+{% endblock %}

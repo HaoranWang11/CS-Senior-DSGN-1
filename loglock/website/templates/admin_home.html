@@ -1,0 +1,141 @@
+{% extends "admin_base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Attendance Log</h1>
+	Add check-in code: <input type="text" id="check_in_pwd" autocomplete="off"/> <button style="border-radius:revert;" onclick="add_check_in_pwd();">Add</button>
+	<br /><br />
+	{% if checkinpwds.items|length == 0 %}
+	<span>No  check-in password data</span>
+	{% endif %}
+	{% if checkinpwds.items|length != 0 %}
+	<div style="width:100%; color: white; background-color: #33333366; padding: 16px;">
+    <table style="width:100%;">
+      <thead>
+        <tr style="height:32px;">
+          <th style="width:20%; text-align:left; color:#aaaabb;">check-in password</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">created at</th>
+		  <th style="width:20%; text-align:right; color:#aaaabb;">Operate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in checkinpwds.items %}
+          <tr style="height:42px;">
+			<td style="width:20%; text-align:left">{{ item.pwd }}</td>
+            <td style="width:20%; text-align:left">
+                {{ item.created_at.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+            </td>
+			<td style="width:20%; text-align:right">
+				<button style="border-radius:revert;" onclick="del('{{item.id}}')">Delete</button>
+				<button style="border-radius:revert;" onclick="enter('{{item.pwd}}')">View check-in</button>
+			</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+	</div>
+	{% endif %}
+
+	<div style="margin-top:28px; color: white;">
+		<span>Current: {{ checkinpwds.page }}, PageCount: {{ checkinpwds.pages }}, Items: {{ checkinpwds.total }}</span>
+		<a style="color: #22d6d6;" href="/admin/admin_home">&lt;Home&gt;</a>
+		{% if checkinpwds.has_prev %}
+			<a style="color: #22d6d6;" href="/admin/admin_home?page={{checkinpwds.prev_num}}&limit=10">&lt;Prev&gt;</a>
+		{% endif %}
+		{% if checkinpwds.has_next %}
+		<a style="color: #22d6d6;" href="/admin/admin_home?page={{checkinpwds.next_num}}&limit=10">&lt;Next&gt;</a>
+		{% endif %}
+		<a style="color: #22d6d6;" href="/admin/admin_home?page={{checkinpwds.pages}}&limit=10">&lt;End&gt;</a>
+	</div>
+  </body>
+  <script>
+	function add_check_in_pwd() {
+		let pwd = document.getElementById('check_in_pwd').value;
+		if (pwd.trim().length < 1) {
+			Swal.fire("error", "No check in password entered!");
+			return;
+		}
+		var params = {
+			pwd : pwd
+        };
+        var url = '/admin/add_check_in_pwd';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+				Swal.fire({
+            		title: 'add success',
+            		icon: 'success',
+            		showCancelButton: false,
+            		confirmButtonText: 'Ok',
+            		cancelButtonText: 'cancel'
+        			}).then((result) => {
+            			if (result.value) {
+            				location.reload();
+            			}
+        			});
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+
+	function del(id) {
+		Swal.fire({
+			title: 'Are you sure to delete?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes',
+			cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.value) {
+            	post_del(id);
+            }
+        });
+	}
+
+	function post_del(id) {
+		var params = {
+			id : id
+        };
+        var url = '/admin/delete_check_in_pwd';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+				Swal.fire({
+            		title: 'Delete success',
+            		icon: 'success',
+            		showCancelButton: false,
+            		confirmButtonText: 'Ok',
+            		cancelButtonText: 'cancel'
+        			}).then((result) => {
+            			if (result.value) {
+            				location.reload();
+            			}
+        			});
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+
+	function enter(pwd) {
+		window.location.href = '/admin/attendance_by_pwd?pwd='+pwd;
+	}
+  </script>
+{% endblock %}

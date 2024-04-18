@@ -1,0 +1,95 @@
+{% if user.role == 'admin' %}
+	{% extends "admin_base.html" %}
+{% elif user.role == 'teacher' %}
+	{% extends "teacher_base.html" %}
+{% else %}
+	{% extends "user_base.html" %}
+{% endif %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+	<h1>Account Settings</h1>
+	<br />
+	<div style="width: 500px; color: white; background-color: #33333366; padding: 16px; margin: 0 auto;">
+		<div class="mainin1" style="margin: 0 auto; max-width: 400px; text-align: center;">
+			<ul style="list-style: none; padding: 0;">
+				<li style="margin-bottom: 20px;">
+					<span style="display: inline-block; width: 200px; text-align: right; padding-right: 16px;">Email</span>
+					<input type="email" id="email" name="email" class="SearchKeyword" value="{{ user.email }}" readonly>
+				</li>
+				<li style="margin-bottom: 20px;">
+					<span style="display: inline-block; width: 200px; text-align: right; padding-right: 16px;">New Password</span>
+					<input type="password" id="password" name="password" class="SearchKeyword2" required>
+				</li>
+				<li style="margin-bottom: 20px;">
+				    <span style="display: inline-block; width: 200px; text-align: right; padding-right: 16px;">Confirm Password</span>
+					<input type="password" id="password2" name="password2" class="SearchKeyword2" required>
+				</li>
+				<li style="margin-bottom: 20px;">
+					<span style="display: inline-block; width: 200px; text-align: right; padding-right: 16px;">Name</span>
+					<input type="text" id="name" name="name" class="SearchKeyword" value="{{ user.name }}" autocomplete="off" required>
+				</li>
+				<li>
+					<button class="submit" style="padding: 5px 10px;" onclick="modify()">Submit</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<script>
+	function modify() {
+		let password = document.getElementById('password').value;
+		if (password.trim().length < 1) {
+			Swal.fire("error", "No new password entered!");
+			return;
+		}
+		let password2 = document.getElementById('password2').value;
+		if (password2.trim().length < 1) {
+			Swal.fire("error", "No Confirm password entered!");
+			return;
+		}
+		if (password != password2) {
+			Swal.fire("error", "Confirm password does not match!");
+			return;
+		}
+		let name = document.getElementById('name').value;
+		if (name.trim().length < 1) {
+			Swal.fire("error", "No name entered!");
+			return;
+		}
+
+		var params = {
+			password : password,
+			name : name
+        };
+        var url = '/accountsettings';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+					Swal.fire({
+            			title: 'success',
+            			icon: 'success',
+            			showCancelButton: false,
+            			confirmButtonText: 'Ok',
+            			cancelButtonText: 'cancel'
+        			}).then((result) => {
+            			if (result.value) {
+            				location.reload();
+            			}
+        			});
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+</script>
+{% endblock %}

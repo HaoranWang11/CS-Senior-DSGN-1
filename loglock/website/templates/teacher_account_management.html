@@ -1,0 +1,138 @@
+{% extends "teacher_base.html" %}
+{% block title %}Account management{% endblock %}
+
+{% block content %}
+    <h1>Account management</h1>
+	<br />
+	{% if users.items|length == 0 %}
+	<span>No attendance data</span>
+	{% endif %}
+	{% if users.items|length != 0 %}
+	<div style="width:100%; color: white; background-color: #33333366; padding: 16px;">
+    <table style="width:100%">
+      <thead>
+        <tr style="height:32px;">
+          <th style="width:15%; text-align:left; color:#aaaabb;">User Name</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">User Email</th>
+          <th style="width:16%; text-align:left; color:#aaaabb;">Role</th>
+		  <th style="width:20%; text-align:left; color:#aaaabb;">Register Date</th>
+		  <th style="width:20%; text-align:right; color:#aaaabb;">Operate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in users.items %}
+          <tr style="height:42px;">
+			<td style="width:15%; text-align:left">{{ item.name }}</td>
+            <td style="width:20%; text-align:left">{{ item.email }}</td>
+			<td style="width:16%; text-align:left">
+				{% if item.email == 'admin' %}
+					{{item.role}}
+				{% else %}
+				<select id="sel_role_{{item.id}}" name="sel_role_{{item.id}}" style="width: 50%; height: 32px; border-radius: 5px;" onchange="change_role('{{item.email}}',this.value);">
+					<option {% if item.role == 'user' %} selected {% endif %} value="user">user</option>
+					<option {% if item.role == 'teacher' %} selected {% endif %} value="teacher">teacher</option>
+					<option {% if item.role == 'admin' %} selected {% endif %} value="admin">admin</option>
+				</select>
+				{% endif %}
+			</td>
+            <td style="width:20%; text-align:left">
+                {{ item.created_at.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+            </td>
+			<td style="width:20%; text-align:right">
+				{% if item.email != 'admin' %}
+				<button style="border-radius:revert;" onclick="del('{{item.email}}')">Delete</button>
+				{% endif %}
+			</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+	</div>
+	{% endif %}
+
+	<div style="margin-top:18px; color: white;">
+		<span>Current:{{ users.page }}, PageCount: {{ users.pages }}, Items: {{ users.total }}</span>
+		<a style="color: #22d6d6;" href="/teacher/account_management">&lt;Home&gt;</a>
+		{% if users.has_prev %}
+			<a style="color: #22d6d6;" href="/teacher/account_management?page={{users.prev_num}}&limit=10">&lt;Prev&gt;</a>
+		{% endif %}
+		{% if users.has_next %}
+		<a style="color: #22d6d6;" href="/teacher/account_management?page={{users.next_num}}&limit=10">&lt;Next&gt;</a>
+		{% endif %}
+		<a style="color: #22d6d6;" href="/teacher/account_management?page={{users.pages}}&limit=10">&lt;End&gt;</a>
+	</div>
+  </body>
+
+  <script>
+	function change_role(email,role) {
+		var params = {
+			e : email,
+			r : role
+        };
+        var url = '/teacher/change_role';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+                	Swal.fire("success", result.msg);
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+
+	function del(email) {
+		Swal.fire({
+			title: 'Are you sure to delete?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes',
+			cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.value) {
+            	post_del(email);
+            }
+        });
+	}
+
+	function post_del(email) {
+		var params = {
+			e : email
+        };
+        var url = '/teacher/delete';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: params,
+			dataType: "json",
+            success: function (result) {
+                if (result.result == 200) {
+				Swal.fire({
+            		title: 'Delete success',
+            		icon: 'success',
+            		showCancelButton: false,
+            		confirmButtonText: 'Ok',
+            		cancelButtonText: 'cancel'
+        			}).then((result) => {
+            			if (result.value) {
+            				location.reload();
+            			}
+        			});
+                } else {
+                    Swal.fire("error", result.msg);
+                }
+            },
+            error: function () {
+                Swal.fire("error", "network error!");
+            }
+        });
+	}
+  </script>
+{% endblock %}
